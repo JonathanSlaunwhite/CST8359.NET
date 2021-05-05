@@ -1,0 +1,95 @@
+﻿@model Lab4.Models.ViewModels.CommunityViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+
+
+
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table"  bgcolor="#f5f542">
+    <thead>
+        <tr>
+            <th>
+                @*Your ViewModel does not have these field, so you need to hardcode them*@
+                Title
+            </th>
+            <th>
+                @*Same here*@
+                Budget
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @* TODO: Please explain back to me by email what changed here and why*@
+        @foreach (var item in Model.Communities)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Budget)
+                </td>
+                <td>
+                    @*leaving to you to add the select here*@
+
+                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
+
+                    <a asp-action="ShowAdd" asp-route-id="@item.ID">Ads</a> |
+
+
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@*look at the sample code, are you missing anything here?*@
+
+
+@if (Model.CommunityMemberships != null)
+{
+<h3>
+    Members of the community
+</h3>
+    <table class="table">
+        <tr>
+
+
+
+
+            
+
+
+            @if (Model.CommunityMemberships.Count() > 0)
+            {
+                <th> Name </th>
+            }
+            else
+            {
+        <th> No Members of the community </th>
+            }
+
+
+        </tr>
+        @foreach (var item in Model.CommunityMemberships)
+        {
+            <tr>
+                <td>
+                    @item.Student.FullName
+                </td>
+            </tr>
+        }
+    </table>
+}

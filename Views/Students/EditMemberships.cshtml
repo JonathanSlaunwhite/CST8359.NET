@@ -1,0 +1,125 @@
+﻿@model Lab4.Models.ViewModels.CommunityMembersipViewModel
+
+
+
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "EditMemberships";
+}
+
+
+
+<h1>Edit</h1>
+<h1>Student</h1>
+
+<table class="table">
+
+
+
+    <thead>
+        <tr>
+            <th>
+                FullName
+            </th>
+
+            <th>
+
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+
+
+        @foreach (var item in Model.Communities)
+        {
+
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+
+
+
+                </td>
+                <td>
+
+                    @{
+
+                        Boolean pass = false;
+                        foreach (var bob in Model.CommunityMemberships)
+                        {
+
+
+
+
+
+
+
+                            if (item.Title.Equals(bob.Community.Title))
+                            {
+
+                                //Console.WriteLine(item.Title+"      "+bob.Community.Title);
+                                // Console.WriteLine(bob.CommunityID + "      " + bob.StudentID+"\n");
+
+                                <a asp-action="RemoveMembership" asp-route-com=@bob.CommunityID asp-route-id=@bob.StudentID>UnRegistor</a>
+
+
+
+
+                                pass = true;
+                                break;
+                            }
+                            else
+                            {
+
+
+                            }
+
+                        }
+
+
+                        if (pass == false)
+                        {
+
+
+
+                            //  <a asp-action="AddMembership">Registor</a>
+
+                            Console.WriteLine(item.ID + "     " + Model.number);
+
+                            <a asp-action="Addmembership" asp-route-com=@item.ID asp-route-id=@Model.number>Registor</a>
+
+
+                            pass = false;
+                        }
+
+
+
+
+
+                    }
+
+
+                </td>
+
+                <td>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+
+
+    </tbody>
+</table>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

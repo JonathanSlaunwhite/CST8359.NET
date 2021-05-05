@@ -1,0 +1,107 @@
+﻿@model Lab4.Models.ViewModels.AdsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "showAdd";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="MakeAdd" asp-route-id="@Model.comID">Create New</a>
+
+
+
+</p>
+
+
+
+
+
+@{
+
+// @foreach (var item in Model.Advertisements)
+//  {
+
+
+
+
+
+//  }
+
+
+
+}
+
+
+
+
+
+
+
+@{
+
+
+
+@if (Model.Advertisements.Count() == 0)
+{
+ <p>There are no files to display.</p>
+}
+else
+{
+ <table class="table">
+     <thead>
+         <tr>
+             <th>
+                 File Name!
+             </th>
+             <th>
+                 Image
+             </th>
+             <th></th>
+         </tr>
+     </thead>
+     <tbody>
+         @foreach (var item in Model.Advertisements)
+         {
+
+
+             if (item.Memb.Equals(Model.comID))
+             {
+
+
+             <tr>
+                 <td>
+                     @Html.DisplayFor(modelItem => item.FileName)
+                 </td>
+                 <td>
+                     <img src="@item.Url" style="max-width: 400px;" />
+                 </td>
+                 <td>
+                     <a asp-action="DeleteAdd" asp-route-id="@item.AnswerImageId">Delete</a>
+                 </td>
+             </tr>
+
+             }
+             else
+             {
+
+             }
+
+
+
+
+         }
+     </tbody>
+ </table>
+}
+
+
+
+}
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

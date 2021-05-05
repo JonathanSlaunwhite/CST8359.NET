@@ -1,0 +1,49 @@
+﻿@model Lab4.Models.ViewModels.AdsViewModel
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create";
+}
+
+<h1>Upload</h1>
+
+<h4>Upload a smily face</h4>
+<hr />
+<div class="row">
+
+  
+
+
+    @{ 
+
+
+        string bob = Context.Request.Path;
+
+        string an= bob.Substring(21);
+
+        Console.WriteLine(an);
+
+    }
+
+
+    <div class="col-md-4">
+        <form asp-action="MakeAdd" enctype="multipart/form-data" asp-route-id="@an">
+            <div class="form-group">
+                <div class="btn btn-sm float-left">
+                    <input name="file" type="file">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button name="upload" class="btn btn-primary">Upload Now</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

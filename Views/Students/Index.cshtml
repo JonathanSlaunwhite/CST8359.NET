@@ -1,0 +1,104 @@
+﻿@model Lab4.Models.ViewModels.CommunityViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table" bgcolor="#21e9ff">
+    <thead>
+        <tr>
+            <th>
+                Last name
+            </th>
+            <th>
+                first name
+            </th>
+            <th>
+                enrollment date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Students)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EnrollmentDate)
+
+
+
+
+                </td>
+                <td>
+
+
+                   
+
+                    <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
+
+
+
+                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+
+
+
+                    <a asp-action="EditMemberships" asp-route-id="@item.ID">Edit Memberships</a>
+
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+
+
+
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@if (Model.CommunityMemberships != null)
+{
+    <h3>
+        Members of the community
+    </h3>
+    <table class="table">
+        <tr>
+
+
+            @if (Model.CommunityMemberships.Count() > 0)
+            {
+                <th> Name </th>
+            }
+            else
+            {
+                <th> No Members of the community </th>
+            }
+
+
+        </tr>
+        @foreach (var item in Model.CommunityMemberships)
+        {
+            <tr>
+                <td>
+                    @item.Community.Title
+                </td>
+            </tr>
+        }
+    </table>
+}
